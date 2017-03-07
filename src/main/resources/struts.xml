@@ -7,7 +7,7 @@
 <struts>
 <package name="default"  namespace="/" extends="struts-default">
     <action name="hello" class="org.lion.action.HelloAction" method="sayHello">
-        <result name="ok"></result>
+        <result name="ok">/ok.jsp</result>
     </action>
 </package>
 </struts>
