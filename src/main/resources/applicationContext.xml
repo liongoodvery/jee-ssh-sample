@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
-	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context.xsd
-	http://www.springframework.org/schema/aop
-	http://www.springframework.org/schema/aop/spring-aop.xsd
+
+
+
+
 	http://www.springframework.org/schema/tx 
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
@@ -38,7 +36,7 @@
         <!-- 引入映射的配置文件 -->
         <property name="mappingResources">
             <list>
-                <!--<value>com/itheima/domain/User.hbm.xml</value>-->
+                <value>User.hbm.xml</value>
                 <!--<value>com/itheima/domain/Customer.hbm.xml</value>-->
                 <!--<value>com/itheima/domain/Dict.hbm.xml</value>-->
             </list>
@@ -48,24 +46,37 @@
     <!-- 先配置平台事务管理器 -->
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
+
     </bean>
 
     <!-- 开启事务的注解 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
+    <bean id="userAction" class="org.lion.action.UserAction" scope="prototype">
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <bean id="userDao" class="org.lion.dao.UserDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="userService" class="org.lion.service.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+
     <!--&lt;!&ndash; 配置客户模块 &ndash;&gt;-->
     <!--<bean id="customerAction" class="com.itheima.web.action.CustomerAction" scope="prototype">-->
-        <!--<property name="customerService" ref="customerService"/>-->
+    <!--<property name="customerService" ref="customerService"/>-->
     <!--</bean>-->
 
     <!--<bean id="customerService" class="com.itheima.service.CustomerServiceImpl">-->
-        <!--<property name="customerDao" ref="customerDao"/>-->
+    <!--<property name="customerDao" ref="customerDao"/>-->
     <!--</bean>-->
 
     <!--<bean id="customerDao" class="com.itheima.dao.CustomerDaoImpl">-->
-        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
+    <!--<property name="sessionFactory" ref="sessionFactory"/>-->
     <!--</bean>-->
-
 
 
 </beans>

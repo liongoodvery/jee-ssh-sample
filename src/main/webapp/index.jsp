@@ -10,7 +10,8 @@
 
 <h3>快速入门</h3>
 
-<a href="${ pageContext.request.contextPath }/hello.action">快速入门按钮</a>
+<a href="${ pageContext.request.contextPath }/jsp/login.jsp">login</a><br/>
+<a href="${ pageContext.request.contextPath }/jsp/regist.jsp">regist</a>
 
 </body>
 </html>

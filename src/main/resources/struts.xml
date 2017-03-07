@@ -5,9 +5,13 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-<package name="default"  namespace="/" extends="struts-default">
-    <action name="hello" class="org.lion.action.HelloAction" method="sayHello">
-        <result name="ok">/ok.jsp</result>
-    </action>
-</package>
+    <package name="default" namespace="/" extends="struts-default">
+        <action name="hello" class="org.lion.action.HelloAction" method="sayHello">
+            <result name="ok">/ok.jsp</result>
+        </action>
+
+        <action name="user_*" class="userAction" method="{1}">
+            <result name="ok">/ok.jsp</result>
+        </action>
+    </package>
 </struts>
