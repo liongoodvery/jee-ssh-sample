@@ -5,6 +5,8 @@ import org.lion.domain.User;
 import org.lion.utils.MD5Utils;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by lion on 3/7/17.
  */
@@ -27,4 +29,16 @@ public class UserServiceImpl implements UserService {
     public User checkCode(User user) {
         return userDao.checkCode(user);
     }
+
+    @Override
+    public User login(User user) {
+        user.setUser_password(MD5Utils.md5(user.getUser_password()));
+        return userDao.find(user);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userDao.findAll();
+    }
+
 }
