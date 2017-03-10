@@ -14,4 +14,6 @@ public interface CustomerDao {
     List<Customer> findAll();
 
     void save(Customer customer);
+
+    void delete(Serializable id);
 }

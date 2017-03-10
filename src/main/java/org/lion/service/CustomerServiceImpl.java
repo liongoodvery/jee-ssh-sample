@@ -32,4 +32,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void save(Customer customer) {
         customerDao.save(customer);
     }
+
+    @Override
+    public void delete(Serializable id) {
+        customerDao.delete(id);
+    }
 }

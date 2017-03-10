@@ -52,7 +52,7 @@
                         <TD height=2></TD>
                     </TR>
                 </TABLE>
-                <TABLE borderColor=#cccccc cellSpacing=0 cellPadding=0
+                <TABLE borderColor=#cccccc cellSpacing=0 cellPadding=0 id="tb_customer_list"
                        width="100%" align=center border=0>
                     <TBODY>
                     <TR>
@@ -100,9 +100,9 @@
                                         <TD>${customer.cust_phone }</TD>
                                         <TD>${customer.cust_mobile }</TD>
                                         <TD>
-                                            <a href="${pageContext.request.contextPath }/customerServlet?method=edit&custId=${customer.cust_id}">修改</a>
+                                            <a href="modify?custId=${customer.cust_id}">修改</a>
                                             &nbsp;&nbsp;
-                                            <a href="${pageContext.request.contextPath }/customerServlet?method=delete&custId=${customer.cust_id}">删除</a>
+                                            <a href=delete?custId=${customer.cust_id}>删除</a>
                                         </TD>
                                     </TR>
 
@@ -165,6 +165,49 @@
         </TR>
         </TBODY>
     </TABLE>
+    <script>
+        var constants;
+        var customer;
+        if (!constants) {
+            constants = new Constants();
+        }
+
+        if (!customer) {
+            customer = new Customer();
+        }
+    </script>
+    <script>
+        $(' #tb_customer_list a').click(function () {
+            let $a = $(this);
+            let href = $a.attr("href")
+            let method;
+            let custId;
+            if (href) {
+                let parts = href.split('?')
+                method = parts[0];
+                custId = parts[1].split('=')[1]
+                console.log(method)
+                console.log(custId)
+                if (custId && method == 'delete') {
+                    customer.delete(custId,function (data) {
+                        console.log(data);
+                        $a.closest('tr').remove();
+                    },function (data) {
+                        console.log(data)
+                    })
+                }
+                if (custId && method == 'modify') {
+                    customer.modify(custId,function (data) {
+                        $('#content').children().remove()
+                        $('#content').append($(data).filter('.ret'))
+                        console.log(data)
+                    })
+                }
+            }
+            console.log($a.attr("href"));
+            return false;
+        })
+    </script>
 </FORM>
 </BODY>
 </HTML>

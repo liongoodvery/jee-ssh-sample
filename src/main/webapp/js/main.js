@@ -33,8 +33,8 @@ String.prototype.format = String.prototype.f = function () {
     return s;
 };
 
-class Constants{
-    constructor(){
+class Constants {
+    constructor() {
         this.TYPE_LEVEL = '006';
         this.TYPE_SOURCE = '009';
     }
@@ -42,8 +42,12 @@ class Constants{
 }
 
 
-class Customer{
-    loadOptionByType(dict_type_code,$container) {
+class Customer {
+    constructor(){
+        this.DELETE_ACTION='customer_delete';
+        this.MODIFY_ACTION='customer_modify';
+    }
+    loadOptionByType(dict_type_code, $container) {
         $.post("dict_findByType.action", {'dict_type_code': dict_type_code}, function (data) {
             console.log(data);
             if (data.code == 0) {
@@ -55,13 +59,45 @@ class Customer{
             }
         }, 'json')
     };
+
+    delete(custId, successCallback, faildeCallback) {
+        this.__do_by_cust_id(this.DELETE_ACTION, custId, successCallback, faildeCallback);
+    }
+
+    modify(custId, successCallback, faildeCallback){
+        this.__do_by_cust_id(this.MODIFY_ACTION, custId, successCallback, faildeCallback,'html');
+    }
+
+    __do_by_cust_id(action,custId, successCallback, faildeCallback,type){
+        if (!type) {
+            type = 'json';
+        }
+        $.post(action , {'cust_id': custId}, function (data) {
+            if (type!='json'){
+                if (successCallback) {
+                    successCallback(data);
+                }
+                return;
+            }
+            if (data.code == 0) {
+                if (successCallback) {
+                    successCallback(data);
+                }
+            } else {
+                if (faildeCallback){
+                    faildeCallback(data);
+                }
+            }
+        }, type);
+    }
+
 }
-class ContentLoader{
-    load($container,url,parmas,callback){
+class ContentLoader {
+    load($container, url, parmas, callback) {
         $container.load(url, parmas, callback);
     }
 
-    loadAddCustomer(){
+    loadAddCustomer() {
         $("#content").load("jsp/customer/add.jsp")
     }
 }

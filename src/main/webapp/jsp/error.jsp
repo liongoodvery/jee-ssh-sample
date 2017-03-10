@@ -11,6 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-error
+<div class="ret">
+    error
+</div>
 </body>
 </html>

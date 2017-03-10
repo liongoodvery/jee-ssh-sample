@@ -53,6 +53,34 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
         return NONE;
     }
 
+    public String delete() throws Exception {
+        System.out.println(customer);
+        try {
+            customerService.delete(customer.getCust_id());
+            JsonUtil.ajaxResult(ServletActionContext.getResponse(), 0, "");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JsonUtil.ajaxResult(ServletActionContext.getResponse(), 1, e.getMessage());
+        }
+        return NONE;
+    }
+
+    public String modify() throws Exception {
+        try {
+            customer = customerService.findById(customer.getCust_id());
+            ValueStack vs = ActionContext.getContext().getValueStack();
+            vs.set("customer", customer);
+            System.out.println(customer);
+            if (customer == null) {
+                return ERROR;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ERROR;
+        }
+        return "edit";
+    }
+
     @Override
     public Customer getModel() {
         return customer;

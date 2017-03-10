@@ -28,4 +28,13 @@ public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao 
             throw new DaoException("save customer failed!!");
         }
     }
+
+    @Override
+    public void delete(Serializable id) {
+        Customer c = findById(id);
+        if (c == null) {
+            throw new DaoException("the customer does not exists");
+        }
+        getHibernateTemplate().delete(c);
+    }
 }

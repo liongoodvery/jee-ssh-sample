@@ -3,19 +3,13 @@ package org.lion.dao;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.lion.domain.User;
-import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import java.util.List;
 
 /**
  * Created by lion on 3/7/17.
  */
-public class UserDaoImpl  extends HibernateDaoSupport implements UserDao{
-    @Override
-    public void save(User user) {
-        getHibernateTemplate().save(user);
-    }
-
+public class UserDaoImpl  extends BaseDaoImpl<User> implements UserDao{
     @Override
     public User checkCode(User user) {
         DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
@@ -34,10 +28,5 @@ public class UserDaoImpl  extends HibernateDaoSupport implements UserDao{
             return (User) list.get(0);
         }
         return null;
-    }
-
-    @Override
-    public List<User> findAll() {
-        return (List<User>) getHibernateTemplate().find("from User ");
     }
 }
