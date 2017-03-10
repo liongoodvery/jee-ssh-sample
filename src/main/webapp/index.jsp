@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
     <link rel="stylesheet" href="css/main.css">
     <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
     <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css rel=stylesheet>
-    <title>Insert title here</title>
+    <title>Crm</title>
 </head>
 <body>
 
@@ -252,33 +253,12 @@
 </div>
 <script src="js/jquery-3.1.1.js"></script>
 <script src="js/main.js"></script>
+
 <script>
-    let contentLoader = new ContentLoader();
     $('#content').load('jsp/login.jsp');
-    $('#loginBtn').click(function () {
-        console.log("loginBtn");
-        $.post('user_login.action', $('#loginForm').serialize(), function (data) {
-                    if (data.code == 0) {
-                        $('#content').load('jsp/welcome.jsp')
-                    }
-                },
-                'json' // I expect a JSON response
-        );
-        return false;
-    });
-
-    $('#customer_add').click(function () {
-        console.log("customer_add");
-        contentLoader.loadAddCustomer();
-    })
-
-    $('#customer_list').click(function () {
-        console.log("customer_list");
-        $.get("user_list.action",function (data) {
-            console.log($(data));
-            $('#content').html($(data).filter('form'));
-        })
-    })
 </script>
+
+
+
 </body>
 </html>

@@ -11,8 +11,13 @@
         </action>
 
         <action name="user_*" class="userAction" method="{1}">
-            <result name="ok">/ok.jsp</result>
+        </action>
+
+        <action name="customer_*" class="customerAction" method="{1}">
             <result name="list">/jsp/customer/list.jsp</result>
+        </action>
+
+        <action name="dict_*" class="dictAction" method="{1}">
         </action>
     </package>
 </struts>

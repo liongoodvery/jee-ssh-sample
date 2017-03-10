@@ -8,10 +8,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </HEAD>
 <BODY>
-<FORM id=form1 name=form1
-      action="${pageContext.request.contextPath }/customerServlet?method=addsubmit"
+<FORM id="add_customer" name="add_customer"
       method=post>
-
 
     <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
         <TBODY>
@@ -46,13 +44,14 @@
                     <TR>
                         <td>客户名称：</td>
                         <td>
-                            <INPUT class=textbox id=sChannel2
-                                   style="WIDTH: 180px" maxLength=50 name="custName">
+                            <INPUT class=textbox id="cust_name"
+                                   style="WIDTH: 180px" maxLength=50 name="cust_name">
                         </td>
                         <td>客户级别 ：</td>
                         <td>
-                            <INPUT class=textbox id=sChannel2
-                                   style="WIDTH: 180px" maxLength=50 name="custLevel">
+                            <select id="level" name="level.dict_id">
+                                <option value="">-- 请选择 --</option>
+                            </select>
                         </td>
                     </TR>
 
@@ -60,13 +59,14 @@
 
                         <td>信息来源 ：</td>
                         <td>
-                            <INPUT class=textbox id=sChannel2
-                                   style="WIDTH: 180px" maxLength=50 name="custSource">
+                            <select id="source" name="source.dict_id">
+                                <option value="">-- 请选择 --</option>
+                            </select>
                         </td>
                         <td>联系人：</td>
                         <td>
-                            <INPUT class=textbox id=sChannel2
-                                   style="WIDTH: 180px" maxLength=50 name="custLinkman">
+                            <INPUT class=textbox id="cust_linkman"
+                                   style="WIDTH: 180px" maxLength=50 name="cust_linkman">
                         </td>
                     </TR>
 
@@ -75,44 +75,51 @@
 
                         <td>固定电话 ：</td>
                         <td>
-                            <INPUT class=textbox id=sChannel2
-                                   style="WIDTH: 180px" maxLength=50 name="custPhone">
+                            <INPUT class=textbox id="cust_phone"
+                                   style="WIDTH: 180px" maxLength=50 name="cust_phone">
                         </td>
                         <td>移动电话 ：</td>
                         <td>
-                            <INPUT class=textbox id=sChannel2
-                                   style="WIDTH: 180px" maxLength=50 name="custMobile">
+                            <INPUT class=textbox id="cust_mobile"
+                                   style="WIDTH: 180px" maxLength=50 name="cust_mobile">
                         </td>
                     </TR>
 
                     <TR>
                         <td>联系地址 ：</td>
                         <td>
-                            <INPUT class=textbox id=sChannel2
-                                   style="WIDTH: 180px" maxLength=50 name="custAddress">
+                            <INPUT class=textbox id="cust_address"
+                                   style="WIDTH: 180px" maxLength=50 name="cust_address">
                         </td>
                         <td>邮政编码 ：</td>
                         <td>
-                            <INPUT class=textbox id=sChannel2
-                                   style="WIDTH: 180px" maxLength=50 name="custZip">
+                            <INPUT class=textbox id="cust_zip"
+                                   style="WIDTH: 180px" maxLength=50 name="cust_zip">
                         </td>
                     </TR>
                     <TR>
                         <td>客户传真 ：</td>
                         <td>
-                            <INPUT class=textbox id=sChannel2
-                                   style="WIDTH: 180px" maxLength=50 name="custFax">
+                            <INPUT class=textbox id="cust_fax"
+                                   style="WIDTH: 180px" maxLength=50 name="cust_fax">
                         </td>
                         <td>客户网址 ：</td>
                         <td>
-                            <INPUT class=textbox id=sChannel2
-                                   style="WIDTH: 180px" maxLength=50 name="custWebsite">
+                            <INPUT class=textbox id="cust_website"
+                                   style="WIDTH: 180px" maxLength=50 name="cust_website">
                         </td>
                     </TR>
                     <tr>
                         <td rowspan=2>
-                            <INPUT class=button id=sButton2 type=submit
-                                   value=" 保存 " name=sButton2>
+                            <INPUT class=button id="btn_add_customer" type="submit"
+                                   value=" 保存 " name="btn_add_customer">
+                            <INPUT class=button id="btn_reset_customer" type="reset"
+                                   value=" reset " name="btn_add_customer">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan=2 id="msg">
                         </td>
                     </tr>
                 </TABLE>
@@ -137,5 +144,49 @@
         </TBODY>
     </TABLE>
 </FORM>
+<script>
+    String.prototype.format = String.prototype.f = function () {
+        var s = this,
+                i = arguments.length;
+
+        while (i--) {
+            s = s.replace(new RegExp('\\{' + i + '\\}', 'gm'), arguments[i]);
+        }
+        return s;
+    };
+    var constants;
+    var customer;
+    if (!constants) {
+        constants = new Constants();
+    }
+
+    if (!customer) {
+        customer = new Customer();
+    }
+</script>
+<script>
+    $("#btn_add_customer").click(function () {
+        console.log("btn_add_customer");
+        let params = $("#add_customer").serialize();
+        console.log(params);
+        $.post('customer_save.action',params,function (data) {
+            if (data.code==0) {
+                $('#msg').html("succuess")
+                $('#btn_reset_customer').click()
+                setTimeout(function () {
+                    $('#msg').html("")
+                }, 1000);
+                console.log("save success");
+            }else {
+                $('#msg').html("failed")
+                console.log(data.msg);
+            }
+        },'json')
+        return false;
+    });
+
+    customer.loadOptionByType(constants.TYPE_LEVEL, $('#level'))
+    customer.loadOptionByType(constants.TYPE_SOURCE, $('#source'));
+</script>
 </BODY>
 </HTML>

@@ -2,6 +2,7 @@ package org.lion.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import org.lion.response.BaseResponse;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -32,19 +33,13 @@ public class JsonUtil {
 			e.printStackTrace();
 		}	
 	}
-	/**
-	 * ajax提交后回调的json字符串
-	 * @return
-	 */
-	public static String ajaxResult(boolean success,String message)
-	{
-		Map map=new HashMap();
-		map.put("success", success);//是否成功
-		map.put("message", message);//文本消息
-		String json= JSON.toJSONString(map);		
-		return json;
+
+	public static void ajaxResult(HttpServletResponse response,int code, String msg) {
+		BaseResponse baseResponse = new BaseResponse();
+		baseResponse.setCode(code);
+		baseResponse.setMsg(msg);
+		write_json(response, toJSONString(baseResponse));
 	}
-	
 
 	/**
 	 * JSON串自动加前缀

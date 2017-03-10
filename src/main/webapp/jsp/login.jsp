@@ -95,7 +95,32 @@
 
 </FORM>
 <script>
+    let contentLoader = new ContentLoader();
 
+    $('#loginBtn').click(function () {
+        console.log("loginBtn");
+        $.post('user_login.action', $('#loginForm').serialize(), function (data) {
+                    if (data.code == 0) {
+                        $('#content').load('jsp/welcome.jsp')
+                    }
+                },
+                'json' // I expect a JSON response
+        );
+        return false;
+    });
+
+    $('#customer_add').click(function () {
+        console.log("customer_add");
+        contentLoader.loadAddCustomer();
+    })
+
+    $('#customer_list').click(function () {
+        console.log("customer_list");
+        $.get("customer_list.action",function (data) {
+            console.log($(data));
+            $('#content').html($(data).filter('form'));
+        })
+    })
 </script>
 </body>
 </html>

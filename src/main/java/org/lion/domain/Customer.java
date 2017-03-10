@@ -1,10 +1,5 @@
 package org.lion.domain;
 
-/**
- * 客户的JavaBean
- *
- * @author Administrator
- */
 public class Customer {
 
     /**
@@ -20,18 +15,32 @@ public class Customer {
      * `cust_mobile` varchar(16) DEFAULT NULL COMMENT '移动电话',
      */
 
-    // 以后使用包装类，默认值是null
     private Long cust_id;
+    // 客户名称
     private String cust_name;
     private Long cust_user_id;
     private Long cust_create_id;
-    private String cust_source;
-    private String cust_industry;
-    private String cust_level;
+
+	/*// 客户的来源
+	private String cust_source;
+	// 所属于行业
+	private String cust_industry;
+	// 客户的级别
+	private String cust_level;*/
+
+    // 联系人名称
     private String cust_linkman;
+    // 固定电话
     private String cust_phone;
+    // 移动电话
     private String cust_mobile;
 
+    // 描述的是 一客户的来源，多是客户
+    private Dict source;
+    // 一客户的行业 多是客户
+    private Dict industry;
+    // 一客户级别 多是客户
+    private Dict level;
 
     public Long getCust_id() {
         return cust_id;
@@ -65,30 +74,6 @@ public class Customer {
         this.cust_create_id = cust_create_id;
     }
 
-    public String getCust_source() {
-        return cust_source;
-    }
-
-    public void setCust_source(String cust_source) {
-        this.cust_source = cust_source;
-    }
-
-    public String getCust_industry() {
-        return cust_industry;
-    }
-
-    public void setCust_industry(String cust_industry) {
-        this.cust_industry = cust_industry;
-    }
-
-    public String getCust_level() {
-        return cust_level;
-    }
-
-    public void setCust_level(String cust_level) {
-        this.cust_level = cust_level;
-    }
-
     public String getCust_linkman() {
         return cust_linkman;
     }
@@ -113,31 +98,43 @@ public class Customer {
         this.cust_mobile = cust_mobile;
     }
 
-    @Override
-    public String toString() {
-        return "Customer [cust_id=" + cust_id + ", cust_name=" + cust_name + ", cust_user_id=" + cust_user_id
-                + ", cust_create_id=" + cust_create_id + ", cust_source=" + cust_source + ", cust_industry="
-                + cust_industry + ", cust_level=" + cust_level + ", cust_linkman=" + cust_linkman + ", cust_phone="
-                + cust_phone + ", cust_mobile=" + cust_mobile + "]";
+    public Dict getSource() {
+        return source;
     }
 
+    public void setSource(Dict source) {
+        this.source = source;
+    }
+
+    public Dict getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(Dict industry) {
+        this.industry = industry;
+    }
+
+    public Dict getLevel() {
+        return level;
+    }
+
+    public void setLevel(Dict level) {
+        this.level = level;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "cust_id=" + cust_id +
+                ", cust_name='" + cust_name + '\'' +
+                ", cust_user_id=" + cust_user_id +
+                ", cust_create_id=" + cust_create_id +
+                ", cust_linkman='" + cust_linkman + '\'' +
+                ", cust_phone='" + cust_phone + '\'' +
+                ", cust_mobile='" + cust_mobile + '\'' +
+                ", source=" + source +
+                ", industry=" + industry +
+                ", level=" + level +
+                '}';
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

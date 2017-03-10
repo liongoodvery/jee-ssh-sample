@@ -1,17 +1,15 @@
 package org.lion;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lion.domain.User;
-import org.lion.service.UserService;
+import org.lion.domain.Dict;
+import org.lion.service.DictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -21,23 +19,16 @@ import java.util.List;
 @ContextConfiguration(locations = {"classpath:applicationContext.xml","classpath:applicationContext-test.xml"})
 @Transactional
 @Commit
-public class UserTest {
-    @Resource(name = "userService")
-    UserService userService;
+public class DictTest {
     @Autowired
-    User user;
-    @Test
-    public void testLogin() throws Exception {
-        Assert.assertNotNull(userService);
-        User user = userService.login(this.user);
-        System.out.println(user);
-    }
+    DictService dictService;
 
     @Test
-    public void testFindAll() throws Exception {
-        List<User> all = userService.findAll();
-        for (User user1 : all) {
-            System.out.println(user1);
+    public void test23() throws Exception {
+        List<Dict> dicts = dictService.findByType("006");
+        for (Dict dict : dicts) {
+            System.out.println(dict);
         }
     }
+
 }

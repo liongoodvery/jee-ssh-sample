@@ -2,7 +2,6 @@ package org.lion.action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
-import com.opensymphony.xwork2.util.ValueStack;
 import org.apache.struts2.ServletActionContext;
 import org.lion.domain.User;
 import org.lion.response.BaseResponse;
@@ -12,7 +11,6 @@ import org.lion.utils.JsonUtil;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 /**
  * Created by lion on 3/7/17.
@@ -78,11 +76,4 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         return NONE;
     }
 
-    public String list() {
-
-        List<User> users = userService.findAll();
-        ValueStack vs = ActionContext.getContext().getValueStack();
-        vs.set("users", users);
-        return "list";
-    }
 }
