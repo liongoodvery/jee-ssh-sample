@@ -21,19 +21,6 @@
 
   <import resource="classpath:applicationContext-common.xml"/>
 
-    <!--&lt;!&ndash; 配置客户模块 &ndash;&gt;-->
-    <!--<bean id="customerAction" class="com.itheima.web.action.CustomerAction" scope="prototype">-->
-    <!--<property name="customerService" ref="customerService"/>-->
-    <!--</bean>-->
-
-    <!--<bean id="customerService" class="com.itheima.service.CustomerServiceImpl">-->
-    <!--<property name="customerDao" ref="customerDao"/>-->
-    <!--</bean>-->
-
-    <!--<bean id="customerDao" class="com.itheima.dao.CustomerDaoImpl">-->
-    <!--<property name="sessionFactory" ref="sessionFactory"/>-->
-    <!--</bean>-->
-
 
 </beans>
 

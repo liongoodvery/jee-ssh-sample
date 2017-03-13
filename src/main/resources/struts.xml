@@ -10,19 +10,7 @@
         <global-results>
             <result name="error">/jsp/error.jsp</result>
         </global-results>
-        <action name="hello" class="org.lion.action.HelloAction" method="sayHello">
-            <result name="ok">/ok.jsp</result>
-        </action>
-
         <action name="user_*" class="userAction" method="{1}">
-        </action>
-
-        <action name="customer_*" class="customerAction" method="{1}">
-            <result name="list">/jsp/customer/list.jsp</result>
-            <result name="edit">/jsp/customer/edit.jsp</result>
-        </action>
-
-        <action name="dict_*" class="dictAction" method="{1}">
         </action>
     </package>
 </struts>

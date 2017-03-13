@@ -21,10 +21,6 @@
         <property name="mappingResources">
             <list>
                 <value>hbm/User.hbm.xml</value>
-                <value>hbm/Dict.hbm.xml</value>
-                <value>hbm/Customer.hbm.xml</value>
-                <!--<value>com/itheima/domain/Customer.hbm.xml</value>-->
-                <!--<value>com/itheima/domain/Dict.hbm.xml</value>-->
             </list>
         </property>
     </bean>
@@ -41,12 +37,7 @@
     <bean id="userAction" class="org.lion.action.UserAction" scope="prototype">
         <property name="userService" ref="userService"/>
     </bean>
-    <bean id="customerAction" class="org.lion.action.CustomerAction" scope="prototype">
-        <property name="customerService" ref="customerService"/>
-    </bean>
-    <bean id="dictAction" class="org.lion.action.DictAction" scope="prototype">
-        <property name="dictService" ref="dictService"/>
-    </bean>
+
     <bean id="userDao" class="org.lion.dao.UserDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
@@ -55,18 +46,5 @@
         <property name="userDao" ref="userDao"/>
     </bean>
 
-    <bean id="dictDao" class="org.lion.dao.DictDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
 
-    <bean id="dictService" class="org.lion.service.DictServiceImpl">
-        <property name="dictDao" ref="dictDao"/>
-    </bean>
-
-    <bean id="customerDao" class="org.lion.dao.CustomerDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-    <bean id="customerService" class="org.lion.service.CustomerServiceImpl">
-        <property name="customerDao" ref="customerDao"/>
-    </bean>
 </beans>
