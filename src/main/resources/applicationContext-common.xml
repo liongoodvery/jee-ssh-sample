@@ -21,6 +21,7 @@
         <property name="mappingResources">
             <list>
                 <value>hbm/User.hbm.xml</value>
+                <value>hbm/Book.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -44,6 +45,20 @@
 
     <bean id="userService" class="org.lion.service.UserServiceImpl">
         <property name="userDao" ref="userDao"/>
+    </bean>
+
+
+    <bean id="bookAction" class="org.lion.action.BookAction" scope="prototype">
+        <property name="bookService" ref="bookService"/>
+        <property name="uploadDir" value="/tmp/upload"/>
+    </bean>
+
+    <bean id="bookDao" class="org.lion.dao.BookDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="bookService" class="org.lion.service.BookServiceImpl">
+        <property name="bookDao" ref="bookDao"/>
     </bean>
 
 

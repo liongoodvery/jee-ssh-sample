@@ -5,12 +5,17 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-
-    <package name="default" namespace="/" extends="struts-default">
+<constant name="struts.multipart.maxSize" value="33554432"/>
+    <package name="book" namespace="/" extends="struts-default">
         <global-results>
             <result name="error">/jsp/error.jsp</result>
         </global-results>
         <action name="user_*" class="userAction" method="{1}">
+        </action>
+        <action name="book_*" class="bookAction" method="{1}">
+            <result name="addBook">/jsp/addBook.jsp</result>
+            <result name="list">/jsp/list.jsp</result>
+            <result name="read" type="redirect">/books/${model.filePath}/${model.startPage}</result>
         </action>
     </package>
 </struts>

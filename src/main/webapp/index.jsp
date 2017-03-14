@@ -10,13 +10,15 @@
 </head>
 <body>
 
-<header id="top"></header>
+<header id="top">
+    <p>book manager</p>
+</header>
 
 <aside id="menu"></aside>
-
+<a href="book_add">add</a>
+<a href="book_list">list</a>
 
 <div id="content">
-    <p>hello world</p>
 </div>
 <script src="js/jquery-3.1.1.js"></script>
 <script src="js/main.js"></script>

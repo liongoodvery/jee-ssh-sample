@@ -12,9 +12,7 @@
 	 http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
     <jdbc:embedded-database id="dataSource" type="H2">
-        <jdbc:script location="classpath:sql/crm_sys_user.sql"></jdbc:script>
-        <jdbc:script location="classpath:sql/crm_base_dict.sql"></jdbc:script>
-        <jdbc:script location="classpath:sql/crm_cst_customer.sql"></jdbc:script>
+        <jdbc:script location="classpath:sql/book.sql"></jdbc:script>
     </jdbc:embedded-database>
 
     <bean id="user" class="org.lion.domain.User">

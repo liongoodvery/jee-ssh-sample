@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="org.lion.domain.Book" table="book" dynamic-insert="true" dynamic-update="true">
+        <id name="id" column="BOOK_ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="bookName" column="BOOK_NAME"/>
+        <property name="fileName" column="FILE_NAME"/>
+        <property name="orderNo" column="ORDER_NO"/>
+        <property name="accessTime"  column="ACCESS_TIME" generated="always"></property>
+        <property name="MIME" column="MIME"/>
+        <property name="fileLength" column="FILE_LENGTH"/>
+        <property name="status" column="STATUS"/>
+        <property name="filePath" column="FILE_PATH"/>
+        <property name="startPage" column="START_PAGE"/>
+
+    </class>
+
+</hibernate-mapping>    

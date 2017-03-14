@@ -14,4 +14,8 @@ public class CommonUtils {
     public static boolean isEmpty(Map collection) {
         return collection == null || collection.size() == 0;
     }
+
+    public static boolean isEmpty(CharSequence cs) {
+        return cs == null || cs.length() == 0;
+    }
 }
